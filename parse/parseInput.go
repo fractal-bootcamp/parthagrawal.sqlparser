@@ -1,32 +1,37 @@
-package parser
+package parse
 
 import (
 	"fmt"
 	"strconv"
+	s "strings"
 )
 
 type RawArgs struct {
-	rawWhere  string
 	rawSelect string
 	from      string
+	rawWhere  string
 	limit     int
 }
 
 // takes in raw input from the user. then sends to sub functions to
 // parse WHERE, SELECT, LIMIT, etc.
 
-func parseInput(rawInput string) {
+func ParseInput(rawInput string) {
 
-	rawArgs := parseArgs(rawInput)
+	// rawArgs := parseArgs(rawInput)
 
-	rawWhere := rawArgs.rawWhere
-	rawSelect := rawArgs.rawSelect
-	from := rawArgs.from
-	limit := rawArgs.limit
+	rawSelect := parseArg(rawInput, "SELECT")
+	from := parseArg(rawInput, "FROM")
+	rawWhere := parseArg(rawInput, "WHERE")
+	limit, err := strconv.Atoi(parseArg(rawInput, "LIMIT"))
+	if err != nil {
+		fmt.Println("Error converting limit string to int", err)
+		return
+	}
 
-	fmt.Println("Where: " + rawWhere)
 	fmt.Println("Select: " + rawSelect)
 	fmt.Println("From: " + from)
+	fmt.Println("Where: " + rawWhere)
 	fmt.Println("Limit: " + strconv.Itoa(limit))
 
 	// whereExp = parseWhere(rawWhere)
@@ -34,11 +39,51 @@ func parseInput(rawInput string) {
 
 }
 
-// returns rawSelect, rawFrom, rawWhere, rawLimit
+// returns a parsed argument
+func parseArg(rawInput string, keyword string) string {
 
-func parseArgs(rawInput string) RawArgs {
+	keyIndex := s.Index(rawInput, keyword)
+	keyStart := keyIndex + len(keyword) + 1
+	tempString := rawInput[keyStart:]
+	keyEnd := s.IndexAny(tempString, " ;") + keyStart
 
-	//
+	parsedArg := rawInput[keyStart:keyEnd]
+
+	return parsedArg
+
+	// // check for SELECT
+	// selectIndex := s.Index(rawInput, "SELECT")
+	// selectStart := selectIndex + 7
+	// selectTempString := rawInput[selectStart:]
+	// selectEnd := s.Index(selectTempString, " ")
+
+	// rawSelect := rawInput[selectStart:selectEnd]
+
+	// // check for FROM
+	// fromIndex := s.Index(rawInput, "FROM")
+	// fromStart := fromIndex + 5
+	// fromTempString := rawInput[fromStart:]
+	// fromEnd := s.Index(fromTempString, " ")
+
+	// from := rawInput[fromStart:fromEnd]
+
+	// // check for WHERE
+	// whereIndex := s.Index(rawInput, "WHERE")
+	// selectStart := whereIndex + 7
+	// selectTempString := rawInput[selectStart:]
+	// selectEnd := s.Index(selectTempString, " ")
+
+	// rawSelect := rawInput[selectStart:selectEnd]
+
+	// // check for LIMIT
+	// selectIndex := s.Index(rawInput, "SELECT")
+	// selectStart := selectIndex + 7
+	// selectTempString := rawInput[selectStart:]
+	// selectEnd := s.Index(selectTempString, " ")
+
+	// rawSelect := rawInput[selectStart:selectEnd]
+
+	// //
 
 }
 
