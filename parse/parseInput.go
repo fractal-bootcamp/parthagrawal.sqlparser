@@ -34,22 +34,43 @@ func ParseInput(rawInput string) {
 	fmt.Println("Where: " + rawWhere)
 	fmt.Println("Limit: " + strconv.Itoa(limit))
 
-	selectedCols := parseSelect(rawSelect)
+	// selectedCols := parseSelect(rawSelect)
 
 	// whereExp = parseWhere(rawWhere)
 
 }
 
 // returns a parsed argument
+// need to refactor so it targets not a space or a semicolon but a keyword or semicolon
+
+var keywordStrings = []string{
+	"SELECT",
+	"FROM",
+	"WHERE",
+	"LIMIT",
+	";",
+}
+
 func parseArg(rawInput string, keyword string) string {
 
 	keyIndex := s.Index(rawInput, keyword)
 	keyStart := keyIndex + len(keyword) + 1
 	tempString := rawInput[keyStart:]
-	keyEnd := s.IndexAny(tempString, " ;") + keyStart
+	nextKeyIndex := len(tempString)
+	for _, key := range keywordStrings {
+		idx := s.Index(tempString, key)
+		if idx > -1 {
+			nextKeyIndex = idx
+			break
+		}
+	}
+	nextKeyIndex += keyStart
+	parsedArg := rawInput[keyStart:nextKeyIndex]
 
-	parsedArg := rawInput[keyStart:keyEnd]
+	// nextKeyIndex := s.Index(tempString, "SELECT") + keyStart
 
+	// keyEnd := s.IndexAny(tempString, " ;") + keyStart
+	// find the index of a keyword
 	return parsedArg
 
 }
