@@ -1,11 +1,33 @@
 package parser
 
+import (
+	"fmt"
+	"strconv"
+)
+
+type RawArgs struct {
+	rawWhere  string
+	rawSelect string
+	from      string
+	limit     int
+}
+
 // takes in raw input from the user. then sends to sub functions to
 // parse WHERE, SELECT, LIMIT, etc.
 
 func parseInput(rawInput string) {
 
-	// {rawWhere, rawSelect, from, limit} = parseArgs(rawInput)
+	rawArgs := parseArgs(rawInput)
+
+	rawWhere := rawArgs.rawWhere
+	rawSelect := rawArgs.rawSelect
+	from := rawArgs.from
+	limit := rawArgs.limit
+
+	fmt.Println("Where: " + rawWhere)
+	fmt.Println("Select: " + rawSelect)
+	fmt.Println("From: " + from)
+	fmt.Println("Limit: " + strconv.Itoa(limit))
 
 	// whereExp = parseWhere(rawWhere)
 	// parseSelect(rawSelect)
@@ -14,7 +36,7 @@ func parseInput(rawInput string) {
 
 // returns rawSelect, rawFrom, rawWhere, rawLimit
 
-func parseArgs(rawInput string) {
+func parseArgs(rawInput string) RawArgs {
 
 	//
 
@@ -30,6 +52,8 @@ func parseWhere(rawWhere string) {
 // (ensure it could be ["*"])
 func parseSelect(rawSelect string) []string {
 
+	var cols []string
+	return cols
 }
 
 // given an input predicate expression, perhaps defined recursively somewhere
@@ -41,10 +65,15 @@ func findMatching(whereExp string, table []string) []string {
 	// for index, jsonElem := range table {
 
 	// }
+
+	var matchArr []string
+	return matchArr
 }
 
 // given the number of cols to return and the number of rows to return
 func returnSelected(matchArr []string, selectedCols []string, limit int) []string {
+	var returnArr []string
+	return returnArr
 
 }
 
