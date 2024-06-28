@@ -19,9 +19,9 @@ type RawArgs struct {
 func ParseInput(rawInput string) {
 
 	// trims whitespace
-	rawSelect := s.Trim(parseArg(rawInput, "SELECT"))
-	from := s.Trim(parseArg(rawInput, "FROM"))
-	rawWhere := s.Trim(parseArg(rawInput, "WHERE"))
+	rawSelect := s.TrimSpace(parseArg(rawInput, "SELECT"))
+	from := s.TrimSpace(parseArg(rawInput, "FROM"))
+	rawWhere := s.TrimSpace(parseArg(rawInput, "WHERE"))
 	limit, err := strconv.Atoi(parseArg(rawInput, "LIMIT"))
 	if err != nil {
 		fmt.Println("Error converting limit string to int", err)
