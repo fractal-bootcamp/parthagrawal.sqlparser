@@ -34,8 +34,9 @@ func ParseInput(rawInput string) {
 	fmt.Println("Where: " + rawWhere)
 	fmt.Println("Limit: " + strconv.Itoa(limit))
 
+	selectedCols := parseSelect(rawSelect)
+
 	// whereExp = parseWhere(rawWhere)
-	// parseSelect(rawSelect)
 
 }
 
@@ -63,7 +64,8 @@ func parseWhere(rawWhere string) {
 // (ensure it could be ["*"])
 func parseSelect(rawSelect string) []string {
 
-	var cols []string
+	cols := s.Split(rawSelect, ",")
+
 	return cols
 }
 
