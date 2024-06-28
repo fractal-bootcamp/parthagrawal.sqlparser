@@ -18,11 +18,10 @@ type RawArgs struct {
 
 func ParseInput(rawInput string) {
 
-	// rawArgs := parseArgs(rawInput)
-
-	rawSelect := parseArg(rawInput, "SELECT")
-	from := parseArg(rawInput, "FROM")
-	rawWhere := parseArg(rawInput, "WHERE")
+	// trims whitespace
+	rawSelect := s.Trim(parseArg(rawInput, "SELECT"))
+	from := s.Trim(parseArg(rawInput, "FROM"))
+	rawWhere := s.Trim(parseArg(rawInput, "WHERE"))
 	limit, err := strconv.Atoi(parseArg(rawInput, "LIMIT"))
 	if err != nil {
 		fmt.Println("Error converting limit string to int", err)
@@ -34,8 +33,8 @@ func ParseInput(rawInput string) {
 	fmt.Println("Where: " + rawWhere)
 	fmt.Println("Limit: " + strconv.Itoa(limit))
 
-	// selectedCols := parseSelect(rawSelect)
-
+	selectedCols := parseSelect(rawSelect)
+	fmt.Println("Selected Columns: ", selectedCols)
 	// whereExp = parseWhere(rawWhere)
 
 }
@@ -67,10 +66,6 @@ func parseArg(rawInput string, keyword string) string {
 	nextKeyIndex += keyStart
 	parsedArg := rawInput[keyStart:nextKeyIndex]
 
-	// nextKeyIndex := s.Index(tempString, "SELECT") + keyStart
-
-	// keyEnd := s.IndexAny(tempString, " ;") + keyStart
-	// find the index of a keyword
 	return parsedArg
 
 }
