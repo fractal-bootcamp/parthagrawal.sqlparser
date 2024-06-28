@@ -5,7 +5,7 @@ package parser
 
 func parseInput(rawInput string) {
 
-	// {rawWhere, rawSelect, rawFrom, rawLimit} = parseArgs(rawInput)
+	// {rawWhere, rawSelect, from, limit} = parseArgs(rawInput)
 
 	// whereExp = parseWhere(rawWhere)
 	// parseSelect(rawSelect)
@@ -32,10 +32,20 @@ func parseSelect(rawSelect string) []string {
 
 }
 
-func findMatching(whereExp string, table []string) {
-	for index, jsonElem := range table {
+// given an input predicate expression, perhaps defined recursively somewhere
+// else, and the data table, return matchArr to show all rows in the database
+// that match the requirements of where(). this will be processed by
+// selectCols
 
-	}
+func findMatching(whereExp string, table []string) []string {
+	// for index, jsonElem := range table {
+
+	// }
+}
+
+// given the number of cols to return and the number of rows to return
+func returnSelected(matchArr []string, selectedCols []string, limit int) []string {
+
 }
 
 // first step is WHERE function. WHERE query parser
