@@ -51,40 +51,6 @@ func parseArg(rawInput string, keyword string) string {
 
 	return parsedArg
 
-	// // check for SELECT
-	// selectIndex := s.Index(rawInput, "SELECT")
-	// selectStart := selectIndex + 7
-	// selectTempString := rawInput[selectStart:]
-	// selectEnd := s.Index(selectTempString, " ")
-
-	// rawSelect := rawInput[selectStart:selectEnd]
-
-	// // check for FROM
-	// fromIndex := s.Index(rawInput, "FROM")
-	// fromStart := fromIndex + 5
-	// fromTempString := rawInput[fromStart:]
-	// fromEnd := s.Index(fromTempString, " ")
-
-	// from := rawInput[fromStart:fromEnd]
-
-	// // check for WHERE
-	// whereIndex := s.Index(rawInput, "WHERE")
-	// selectStart := whereIndex + 7
-	// selectTempString := rawInput[selectStart:]
-	// selectEnd := s.Index(selectTempString, " ")
-
-	// rawSelect := rawInput[selectStart:selectEnd]
-
-	// // check for LIMIT
-	// selectIndex := s.Index(rawInput, "SELECT")
-	// selectStart := selectIndex + 7
-	// selectTempString := rawInput[selectStart:]
-	// selectEnd := s.Index(selectTempString, " ")
-
-	// rawSelect := rawInput[selectStart:selectEnd]
-
-	// //
-
 }
 
 // takes in raw where string. returns a predicate of some kind, that can be plugged into
